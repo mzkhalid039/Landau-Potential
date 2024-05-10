@@ -1,3 +1,7 @@
+![image](https://github.com/mzkhalid039/Landau-Potential/assets/52278972/34ee38ae-ead2-4da2-845c-ed72fb390e3d)   ![image](https://github.com/mzkhalid039/Landau-Potential/assets/52278972/6247209f-944d-403e-b877-c363793262f9)
+
+
+
 # MATLAB Code for Plotting a 1D & 3D Surface of Gibbs Free Energy Landscape
 
 This repository contains a MATLAB script that generates a 3D surface plot of a Gibbs free energy landscape. The script utilizes various coefficients and variables to compute the Gibbs free energy, which is then plotted using a 3D surface plot.
