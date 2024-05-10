@@ -1,0 +1,59 @@
+% Define the coefficients a, b, and g
+alpha1 = 138.2;
+alpha11 = -1.625e+04;
+alpha12 = -6.021e+06;
+alpha111 = -1.431e+04;
+alpha112 = 5.971e+06;
+epsilon = 1e7;
+Q11=0.0228;
+Q12=-0.018259;
+Q44=0.064;
+C11=2.88e11;
+C12=1.15e11;
+C44=1.76e10;
+
+%======================Scaling==============================
+ab=1e20;
+alpha1=alpha1/ab;
+alpha11=alpha11/ab;
+alpha111=alpha111/ab;
+alpha112=alpha112/ab;
+alpha12=alpha12/ab;
+C11=C11/ab;
+C12=C12/ab;
+C44=C44/ab;
+
+% Define multiple values of P
+P_values = [0.7];
+
+% Define the range of E and sigma values
+epsilon_values = linspace(-20000, 200000, 100000); % This will create 100 points between -20 and 20 for sigma
+E_values = zeros(length(sigma_values), length(P_values)); % Initialize E_values matrix
+
+% Calculate E for each combination of P and sigma
+for i = 1:length(P_values)
+    P = P_values(i);
+    a = 2*alpha1 * P + 4*alpha11 * P.^3 + 6*alpha111 * P.^5;
+    b = 2*alpha12 * P + 4*alpha112 * P.^3;
+    c = 2*Q11*epsilon^2*P; % Assuming a placeholder value for c, adjust as needed
+    
+    for j = 1:length(epsilon_values)
+        epsilon = epsilon_values(j);
+        E_values(j, i) = a + b - c;
+    end
+end
+
+% Plot the results
+figure;
+hold on;
+for i = 1:length(P_values)
+    plot(epsilon_values, E_values(:, i), 'LineWidth', 2);
+end
+hold off;
+
+% Add labels, title, and legend
+xlabel('Sigma (σ)');
+ylabel('Electric Field (E)');
+title('Quadratic relationship between E and σ for different values of P');
+grid on;
+legend('P = 0.2', 'P = 0.4', 'P = 0.6', 'P = 0.8');
